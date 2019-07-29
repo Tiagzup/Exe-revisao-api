@@ -16,11 +16,13 @@ public class FilmeService {
 	public Iterable<Filme> findAll() {
 		return filmeRepository.findAll();
 	}
-	public Filme catchFilmById (int id) {
-		int filmesDisponiveis = filmeRepository.findById(id).get().getQuantidadeDisponivel();
-		try {
-			
+	public void  rentFilm (int id, Filme filme) {
+		Optional<Filme> optionalFilme = filmeRepository.findById(id);
+		if(!optionalFilme.isPresent()) {
 		}
+		filme.setId(id);
+		filme.setQuantidadeDisponivel(filme.getQuantidadeDisponivel()-1);
+		filmeRepository.save(filme);
 	}
 	
 	
